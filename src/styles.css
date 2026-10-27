@@ -1,0 +1,188 @@
+:root {
+  --bg: #f6f7f9;
+  --card: #ffffff;
+  --text: #1b1f24;
+  --muted: #5b6470;
+  --line: #d9dde3;
+  --accent: #1f5fd1;
+  --good: #137a3f;
+  --bad: #c62828;
+  --bad-soft: #fdecec;
+  font-family: system-ui, -apple-system, 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif;
+  font-size: 18px;
+  line-height: 1.5;
+  color: var(--text);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+}
+
+.page {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 24px 16px 48px;
+}
+
+h1 { font-size: 1.8rem; margin: 0 0 4px; }
+h2 { font-size: 1.3rem; margin: 0 0 12px; }
+.sub { color: var(--muted); margin: 0 0 20px; }
+
+/* ① 고르기 */
+.controls {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: 1fr 1fr;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+.field label, .field .label { display: block; font-weight: 700; margin-bottom: 8px; }
+select, input, button { font: inherit; }
+select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+}
+.facts { margin: 8px 0 0; color: var(--muted); }
+.facts b { color: var(--text); }
+
+.presets { display: flex; flex-wrap: wrap; gap: 8px; }
+.presets button {
+  min-width: 72px;
+  padding: 10px 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+  cursor: pointer;
+}
+.presets button.on {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+  font-weight: 700;
+}
+.field label.custom {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 12px 0 0;
+  font-weight: 400;
+}
+.custom input {
+  width: 110px;
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+/* ② 채널 카드 */
+.cards {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(4, 1fr);
+  margin-bottom: 20px;
+}
+.card {
+  background: var(--card);
+  border: 2px solid var(--line);
+  border-radius: 12px;
+  padding: 18px;
+  min-width: 0;
+}
+.card.loss { border-color: var(--bad); background: var(--bad-soft); }
+
+.rows { margin: 0; }
+.rows div {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--line);
+}
+.rows dt { color: var(--muted); }
+.rows dd { margin: 0; font-variant-numeric: tabular-nums; text-align: right; }
+
+.profit { margin-top: 14px; }
+.profit span { display: block; color: var(--muted); }
+.profit strong {
+  font-size: 2rem;
+  color: var(--good);
+  font-variant-numeric: tabular-nums;
+}
+.card.loss .profit strong { color: var(--bad); }
+.badge {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 2px 10px;
+  border-radius: 999px;
+  background: var(--bad);
+  color: #fff;
+  font-style: normal;
+  font-weight: 700;
+  vertical-align: middle;
+}
+.margin { margin: 2px 0 14px; font-weight: 700; }
+
+.breakeven p { margin: 0 0 8px; font-weight: 700; color: var(--bad); }
+.bar {
+  position: relative;
+  height: 14px;
+  border-radius: 7px;
+  background: #dfe9dd;
+  overflow: hidden;
+}
+.bar .zone { position: absolute; top: 0; bottom: 0; right: 0; background: #f2b8b8; }
+.bar .line { position: absolute; top: 0; bottom: 0; width: 3px; margin-left: -1px; background: var(--bad); }
+.bar .now {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  margin-left: -2px;
+  background: var(--text);
+}
+.scale {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+/* ④ 계산식 */
+.formula, .notes {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+.rules { margin: 0 0 16px; padding-left: 20px; color: var(--muted); }
+.calc {
+  margin: 0 0 8px;
+  font-variant-numeric: tabular-nums;
+  overflow-wrap: anywhere;
+}
+.calc .who { display: inline-block; min-width: 9em; font-weight: 700; }
+.calc.neg b { color: var(--bad); }
+.hint { color: var(--muted); font-size: 0.9rem; margin: 12px 0 0; }
+.notes ul { margin: 0; padding-left: 20px; }
+
+@media (max-width: 1100px) {
+  .cards { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .page { padding: 16px 16px 40px; }
+  h1 { font-size: 1.5rem; }
+  .controls { grid-template-columns: 1fr; padding: 16px; }
+  .cards { grid-template-columns: 1fr; }
+  .calc .who { display: block; }
+}
